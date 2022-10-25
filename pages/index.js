@@ -70,9 +70,9 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           View on Github!!!!
-        </a>{" "}
-        and know that we are suing Firebase as a simple backend for blog posts. <3 CHRIS HYDE
+        </a>
       </footer>
+      {`and know that we are using Firebase as a simple backend for blog posts. <3 CHRIS HYDE`}
     </div>
   );
 }
