@@ -51,7 +51,7 @@ export default function Home() {
         <AppBar>
           <Toolbar color="primary">
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Chris's Blog page {blogs?.length}
+              Chris's Amazing Blog Platform
             </Typography>
           </Toolbar>
         </AppBar>
