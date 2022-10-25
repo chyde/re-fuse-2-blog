@@ -21,7 +21,10 @@ export default function PostPrompt() {
         multiline
         fullWidth
       />
-      <Button variant="contained" sx={{ marginY: 1, float: "right" }}>
+      <Button
+        variant="contained"
+        sx={{ marginY: 1, marginTop: 2, float: "right" }}
+      >
         Post
       </Button>
     </Card>
