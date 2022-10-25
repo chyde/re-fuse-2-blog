@@ -56,7 +56,7 @@ export default function Home() {
           </Toolbar>
         </AppBar>
         <Container maxWidth="sm">
-          <PostPrompt />
+          <PostPrompt label="What's on your mind?" />
           {blogs.map((blog, blogIndex) => (
             <Blog blog={blog} key={blogIndex} />
           ))}

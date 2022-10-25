@@ -8,25 +8,41 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 
+import { auth, firestore, googleAuthProvider } from "../lib/firebase";
+import firebase from "firebase/compat/app";
+
 import cardStyle from "../utils.js";
 
-export default function PostPrompt() {
-  console.log(cardStyle);
+const postBlog = async (content) => {
+  const res = await firestore.collection("blogs").add({
+    author: "Anon Amouse",
+    content: content,
+    // "post-time": new firebase.firestore.Timestamp(Date()),
+  });
+  // Commit both docs together as a batch write.
+};
+
+export default function PostPrompt({ label, onSubmit = console.log }) {
   return (
     <Card className="blog-card" sx={cardStyle} variant="outlined">
-      <TextField
-        id="outlined-basic"
-        label="What's on your mind?"
-        variant="outlined"
-        multiline
-        fullWidth
-      />
-      <Button
-        variant="contained"
-        sx={{ marginY: 1, marginTop: 2, float: "right" }}
-      >
-        Post
-      </Button>
+      <form action="something" onSubmit={onSubmit}>
+        <TextField
+          id="outlined-basic"
+          label={label}
+          variant="outlined"
+          multiline
+          fullWidth
+        />
+        <Button
+          variant="contained"
+          sx={{ marginY: 1, marginTop: 2, float: "right" }}
+          onClick={() => {
+            postBlog("Does this work lmao");
+          }}
+        >
+          Post
+        </Button>
+      </form>
     </Card>
   );
 }
