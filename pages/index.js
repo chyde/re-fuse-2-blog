@@ -71,7 +71,7 @@ export default function Home() {
         >
           View on Github!!!!
         </a>{" "}
-        and know that we are suing Firebase as a simple backend for blog posts.
+        and know that we are suing Firebase as a simple backend for blog posts. <3 CHRIS HYDE
       </footer>
     </div>
   );
