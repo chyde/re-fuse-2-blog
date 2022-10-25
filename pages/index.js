@@ -9,8 +9,33 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Blog from "../components/blog";
 import PostPrompt from "../components/postPrompt";
+import { useContext, useState } from "react";
+import { useEffect } from "react";
+
+import { firestore } from "../lib/firebase";
+
+const getBlogs = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let barsSnapshot = await firestore.collection("blogs").get();
+      resolve(barsSnapshot.docs.map((doc) => doc.data()));
+    } catch (e) {
+      reject([]);
+    }
+  });
+};
 
 export default function Home() {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    // TODO: get our data
+    getBlogs().then((blogs) => {
+      console.log("blogsss", blogs);
+      setBlogs(blogs);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,14 +51,15 @@ export default function Home() {
         <AppBar>
           <Toolbar color="primary">
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Chris's Blog page
+              Chris's Blog page {blogs?.length}
             </Typography>
           </Toolbar>
         </AppBar>
         <Container maxWidth="sm">
           <PostPrompt />
-          <Blog />
-          <Blog />
+          {blogs.map((blog, blogIndex) => (
+            <Blog blog={blog} key={blogIndex} />
+          ))}
         </Container>
       </main>
 
