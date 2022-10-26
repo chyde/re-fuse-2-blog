@@ -56,7 +56,15 @@ export default function Home() {
           </Toolbar>
         </AppBar>
         <Container maxWidth="sm">
-          <PostPrompt label="What's on your mind?" />
+          <PostPrompt
+            label="What's on your mind?"
+            onSubmit={() => {
+              getBlogs().then((blogs) => {
+                // console.log("blogsss", blogs);
+                setBlogs(blogs);
+              });
+            }}
+          />
           {blogs.map((blog, blogIndex) => (
             <Blog blog={blog} key={blogIndex} />
           ))}

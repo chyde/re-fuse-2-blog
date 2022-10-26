@@ -23,6 +23,8 @@ const postBlog = async (content) => {
 };
 
 export default function PostPrompt({ label, onSubmit = console.log }) {
+  const [blogContent, setBlogContent] = useState("");
+
   return (
     <Card className="blog-card" sx={cardStyle} variant="outlined">
       <form action="something" onSubmit={onSubmit}>
@@ -30,6 +32,10 @@ export default function PostPrompt({ label, onSubmit = console.log }) {
           id="outlined-basic"
           label={label}
           variant="outlined"
+          onChange={(textField) => {
+            setBlogContent(textField.target.value);
+          }}
+          value={blogContent}
           multiline
           fullWidth
         />
@@ -37,7 +43,13 @@ export default function PostPrompt({ label, onSubmit = console.log }) {
           variant="contained"
           sx={{ marginY: 1, marginTop: 2, float: "right" }}
           onClick={() => {
-            postBlog("Does this work lmao");
+            return new Promise(async (resolve, reject) => {
+              resolve(await postBlog(blogContent));
+              // resolve();
+            }).then(() => {
+              onSubmit(blogContent); // TODO: Is this a race condition?
+              setBlogContent("");
+            });
           }}
         >
           Post
