@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -13,11 +12,13 @@ import firebase from "firebase/compat/app";
 
 import cardStyle from "../utils.js";
 
+const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
 const postBlog = async (content) => {
   const res = await firestore.collection("blogs").add({
     author: "Anon Amouse",
-    content: content,
-    // "post-time": new firebase.firestore.Timestamp(Date()),
+    content: content ? content : "No content :(",
+    "post-time": serverTimestamp(),
   });
   // Commit both docs together as a batch write.
 };

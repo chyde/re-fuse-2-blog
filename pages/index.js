@@ -17,7 +17,10 @@ import { firestore } from "../lib/firebase";
 const getBlogs = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      let barsSnapshot = await firestore.collection("blogs").get();
+      let barsSnapshot = await firestore
+        .collection("blogs")
+        .orderBy("post-time", "desc")
+        .get();
       resolve(barsSnapshot.docs.map((doc) => doc.data()));
     } catch (e) {
       reject([]);
@@ -29,9 +32,7 @@ export default function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    // TODO: get our data
     getBlogs().then((blogs) => {
-      console.log("blogsss", blogs);
       setBlogs(blogs);
     });
   }, []);
@@ -66,7 +67,9 @@ export default function Home() {
             }}
           />
           {blogs.map((blog, blogIndex) => (
-            <Blog blog={blog} key={blogIndex} />
+            <div key={blogIndex}>
+              <Blog blog={blog} />
+            </div>
           ))}
         </Container>
       </main>
