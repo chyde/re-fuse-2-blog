@@ -40,7 +40,9 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Chris Hyde's amazing and innovative blogging platform!</title>
+        <title>
+          {"Chris Hyde's amazing and innovative blogging platform!"}
+        </title>
         <meta
           name="description"
           content="Custom React page with a simple Firebase backend to show off that I can make a webpage"
@@ -52,7 +54,7 @@ export default function Home() {
         <AppBar>
           <Toolbar color="primary">
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Chris's Amazing Blog Platform
+              {"Chris's Amazing Blog Platform"}
             </Typography>
           </Toolbar>
         </AppBar>
